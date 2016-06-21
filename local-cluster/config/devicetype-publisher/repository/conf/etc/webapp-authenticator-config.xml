@@ -1,0 +1,40 @@
+<WebappAuthenticatorConfig>
+	<Authenticators>
+		<Authenticator>
+			<Name>OAuth</Name>
+			<ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.OAuthAuthenticator</ClassName>
+            <Parameters>
+                <Parameter Name="IsRemote">false</Parameter>
+                <Parameter Name="TokenValidationEndpointUrl">https://key.mgt.iots:9444</Parameter>
+                <Parameter Name="Username">admin</Parameter>
+                <Parameter Name="Password">admin</Parameter>
+                <Parameter Name="MaxTotalConnections">100</Parameter>
+                <Parameter Name="MaxConnectionsPerHost">100</Parameter>
+            </Parameters>
+		</Authenticator>
+        <Authenticator>
+            <Name>BasicAuth</Name>
+            <ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.BasicAuthAuthenticator</ClassName>
+        </Authenticator>
+        <Authenticator>
+            <Name>JWT</Name>
+            <ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.JWTAuthenticator</ClassName>
+        </Authenticator>
+        <Authenticator>
+            <Name>CertificateAuth</Name>
+            <ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.CertificateAuthenticator</ClassName>
+        </Authenticator>
+        <Authenticator>
+            <Name>BST</Name>
+            <ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.BSTAuthenticator</ClassName>
+            <Parameters>
+                <Parameter Name="IsRemote">false</Parameter>
+                <Parameter Name="TokenValidationEndpointUrl">https://localhost:9443</Parameter>
+                <Parameter Name="Username">admin</Parameter>
+                <Parameter Name="Password">admin</Parameter>
+                <Parameter Name="MaxTotalConnections">100</Parameter>
+                <Parameter Name="MaxConnectionsPerHost">100</Parameter>
+            </Parameters>
+        </Authenticator>
+	</Authenticators>
+</WebappAuthenticatorConfig>
