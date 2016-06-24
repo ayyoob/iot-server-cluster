@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><api xmlns="http://ws.apache.org/ns/synapse" name="_VIRTUAL_FIREALARM_SCEP_" context="/virtual_firealarm_scep/scep">
+    <resource methods="GET POST" url-mapping="/*" faultSequence="_api_registration_fault_">
+        <inSequence>
+            <send>
+                <endpoint>
+                    <http uri-template="http://mgt.devicemgt.iots:9767/virtual_firealarm_scep/scep">
+                        <timeout>
+                            <duration>60000</duration>
+                            <responseAction>fault</responseAction>
+                        </timeout>
+                    </http>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+    </resource>
+    <handlers>
+        <handler class="org.wso2.carbon.apimgt.gateway.handlers.ext.APIManagerCacheExtensionHandler"/>
+        <handler class="org.wso2.carbon.apimgt.gateway.handlers.common.SynapsePropertiesHandler"/>
+    </handlers>
+</api>

@@ -22,4 +22,11 @@ ditto -V config/device-key-manager device-key-manager
 
 #create device-key-manager setup
 cp -r wso2iots-1.0.0-SNAPSHOT devicetype-publisher
+
 ditto -V config/devicetype-publisher devicetype-publisher
+cd devicetype-publisher
+mvn clean install
+cd ..
+cp config/virtual_firealarm/virtual_firealarm.jks devicetype-publisher/repository/resources/sketches/virtual_firealarm
+cp config/virtual_firealarm/_VIRTUAL_FIREALARM_SCEP_.xml devicetype-publisher/repository/deployment/server/synapse-configs/default/api/
+
