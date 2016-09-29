@@ -1,17 +1,17 @@
 # iot-server-cluster - Simple Cluster
 
-Place the IoT Pack and execute clusterme.sh
+1) Place the IoT Pack in the localcluster directory and execute clusterme.sh
 
-Execute IoTS.sql script
+2) Execute IoTS.sql script
 
-set below to /etc/hosts
-IP>     mqtt.gateway.iots
-IP>     http.gateway.iots
-IP>     key.mgt.iots
-IP>     das.iots
-IP>     mgt.devicemgt.iots
-IP>     db.iots
+3) Set below to /etc/hosts
+IP     mqtt.gateway.iots
+IP     http.gateway.iots
+IP     key.mgt.iots
+IP     das.iots
+IP     mgt.devicemgt.iots
+IP     db.iots
 
-Create a database user or update the datasources.
+4) Create a database user with below credential or update the datasources.
 user - root
 password - 123
