@@ -33,6 +33,8 @@
 # OS specific support.  $var _must_ be set to either true or false.
 #ulimit -n 100000
 
+# NOTE: This is an edited wso2server.sh script to facilitate spark environment variables for WSO2DAS
+
 cygwin=false;
 darwin=false;
 os400=false;
@@ -137,9 +139,22 @@ fi
 
 # ----- Process the input command ----------------------------------------------
 args=""
+NODE_PARAMS=""
 for c in $*
 do
-    if [ "$c" = "--debug" ] || [ "$c" = "-debug" ] || [ "$c" = "debug" ]; then
+    if [ "$c" = "-receiverNode" ]; then
+          NODE_PARAMS="-DdisableAnalyticsEngine=true -DdisableAnalyticsExecution=true -DdisableIndexing=true -DdisableDataPurging=false -DdisableAnalyticsSparkCtx=true -DdisableAnalyticsStats=true"
+          echo "Starting Data Analytics Server node as a Receiver Node"
+    elif [ "$c" = "-indexerNode" ]; then
+          NODE_PARAMS="-DdisableAnalyticsExecution=true -DdisableAnalyticsEngine=true -DdisableEventSink=true -DdisableAnalyticsSparkCtx=true -DdisableAnalyticsStats=true -DdisableDataPurging=true"
+          echo "Starting Data Analytics Server node as an Indexer Node"
+    elif [ "$c" = "-analyzerNode" ]; then
+          NODE_PARAMS="-DdisableIndexing=true -DdisableEventSink=true -DdisableDataPurging=true -DenableAnalyticsStats=true"
+          echo "Starting Data Analytics Server node as an Analyzer Node"
+    elif [ "$c" = "-dashboardNode" ]; then
+          NODE_PARAMS="-DdisableIndexing=true -DdisableEventSink=true -DdisableDataPurging=true -DenableAnalyticsStats=true -DdisableAnalyticsExecution=true -DdisableAnalyticsEngine=true -DdisableAnalyticsSparkCtx=true "
+          echo "Starting Data Analytics Server node as an Analyzer Node"
+    elif [ "$c" = "--debug" ] || [ "$c" = "-debug" ] || [ "$c" = "debug" ]; then
           CMD="--debug"
           continue
     elif [ "$CMD" = "--debug" ]; then
@@ -181,7 +196,7 @@ elif [ "$CMD" = "start" ]; then
   fi
   export CARBON_HOME=$CARBON_HOME
 # using nohup sh to avoid erros in solaris OS.TODO
-  nohup sh $CARBON_HOME/bin/wso2server.sh $args > /dev/null 2>&1 &
+  nohup sh $CARBON_HOME/bin/wso2server.sh $args $NODE_PARAMS > /dev/null 2>&1 &
   exit 0
 elif [ "$CMD" = "stop" ]; then
   export CARBON_HOME=$CARBON_HOME
@@ -200,7 +215,7 @@ elif [ "$CMD" = "restart" ]; then
   done
 
 # using nohup sh to avoid erros in solaris OS.TODO
-  nohup sh $CARBON_HOME/bin/wso2server.sh $args > /dev/null 2>&1 &
+  nohup sh $CARBON_HOME/bin/wso2server.sh $args $NODE_PARAMS > /dev/null 2>&1 &
   exit 0
 elif [ "$CMD" = "test" ]; then
     JAVACMD="exec "$JAVACMD""
@@ -267,6 +282,9 @@ fi
 START_EXIT_STATUS=121
 status=$START_EXIT_STATUS
 
+#load spark environment variables
+. $CARBON_HOME/bin/load-spark-env-vars.sh
+
 #To monitor a Carbon server in remote JMX mode on linux host machines, set the below system property.
 #   -Djava.rmi.server.hostname="your.IP.goes.here"
 
@@ -274,7 +292,7 @@ while [ "$status" = "$START_EXIT_STATUS" ]
 do
     $JAVACMD \
     -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
-    -Xms256m -Xmx1024m -XX:MaxPermSize=512m \
+    -Xms256m -Xmx1024m -XX:MaxPermSize=256m \
     -XX:+HeapDumpOnOutOfMemoryError \
     -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
     $JAVA_OPTS \
@@ -287,6 +305,7 @@ do
     -Dcarbon.registry.root=/ \
     -Djava.command="$JAVACMD" \
     -Dcarbon.home="$CARBON_HOME" \
+    -Dlogger.server.name="IoT-Analytics" \
     -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
     -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
     -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/etc/logging-bridge.properties" \
@@ -303,8 +322,15 @@ do
     -Dfile.encoding=UTF8 \
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
-    -DworkerNode=false \
-    -Dprofile=mqtt-gateway \
+    -Dmqtt.broker.host="mqtt.gateway.iots" \
+    -Dmqtt.broker.port="1886" \
+    -Diot.core.host="mgt.devicemgt.iots" \
+    -Diot.core.https.port="9443" \
+    -Diot.keymanager.host="key.mgt.iots" \
+    -Diot.keymanager.https.port="9444" \
+    -Diot.gateway.host="http.gateway.iots" \
+    -Diot.gateway.https.port="8247" \
+    $NODE_PARAMS \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done

@@ -33,7 +33,7 @@
             <ClassName>org.wso2.carbon.webapp.authenticator.framework.authenticator.BSTAuthenticator</ClassName>
             <Parameters>
                 <Parameter Name="IsRemote">false</Parameter>
-                <Parameter Name="TokenValidationEndpointUrl">https://localhost:9443</Parameter>
+                <Parameter Name="TokenValidationEndpointUrl">https://key.mgt.iots:9444</Parameter>
                 <Parameter Name="Username">admin</Parameter>
                 <Parameter Name="Password">admin</Parameter>
                 <Parameter Name="MaxTotalConnections">100</Parameter>

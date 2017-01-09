@@ -31,7 +31,7 @@
 
     <!--The URL of the analytics data service is being hosted-->
 
-    <URL>http://das.iots:9766</URL>
+    <URL>http://das.iots:9765</URL>
 
     <!-- A valid user name which have necessary permissions to use the remote services -->
 

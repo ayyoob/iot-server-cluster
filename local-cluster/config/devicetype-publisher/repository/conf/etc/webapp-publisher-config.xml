@@ -29,6 +29,10 @@
     <!-- If it is true, the APIs of this instance will be published to the defined host -->
     <PublishAPI>true</PublishAPI>
     <!--Webapp will be published only when running below profiles-->
+
+    <!-- If it is true, the APIs of this instance will be updated when the webapps are redeployed -->
+    <EnabledUpdateApi>true</EnabledUpdateApi>
+    
     <Profiles>
         <Profile>default</Profile>
         <Profile>devicetype-publisher</Profile>

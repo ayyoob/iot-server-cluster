@@ -77,11 +77,8 @@
 	-->
 	<ServerRoles>
 		<Role>IoTServer</Role>
-		<Role>DataAnalyticsServer</Role>
-		<Role>ComplexEventProcessor</Role>
-		<Role>IoTServer</Role>
+		<Role>CDMFAnalytics</Role>
 		<Role>CDMFPlatform</Role>
-		<Role>GeoDashboard</Role>
 	</ServerRoles>
 
 	<!-- uncommnet this line to subscribe to a bam instance automatically -->
@@ -132,7 +129,7 @@
 		 the define value + Offset.
 		 e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
 		 -->
-		<Offset>2</Offset>
+		<Offset>4</Offset>
 
 		<!-- The JMX Ports -->
 		<JMX>
@@ -367,7 +364,7 @@
 			<!-- Keystore password-->
 			<Password>wso2carbon</Password>
 			<!-- Private Key alias-->
-			<KeyAlias>http</KeyAlias>
+			<KeyAlias>wso2carbon</KeyAlias>
 			<!-- Private Key password-->
 			<KeyPassword>wso2carbon</KeyPassword>
 		</KeyStore>

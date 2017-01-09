@@ -287,6 +287,7 @@ do
     -Dcarbon.registry.root=/ \
     -Djava.command="$JAVACMD" \
     -Dcarbon.home="$CARBON_HOME" \
+    -Dlogger.server.name="IoT-Core" \
     -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
     -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
     -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/etc/logging-bridge.properties" \
@@ -304,6 +305,16 @@ do
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
     -DworkerNode=false \
+    -Dorg.wso2.ignoreHostnameVerification=true \
+    -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
+    -Dmqtt.broker.host="mqtt.gateway.iots" \
+    -Dmqtt.broker.port="1886" \
+    -Diot.core.host="mgt.devicemgt.iots" \
+    -Diot.core.https.port="9443" \
+    -Diot.keymanager.host="key.mgt.iots" \
+    -Diot.keymanager.https.port="9444" \
+    -Diot.gateway.host="http.gateway.iots" \
+    -Diot.gateway.https.port="8247" \
     -Dprofile=devicetype-publisher \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?

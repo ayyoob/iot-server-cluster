@@ -49,10 +49,10 @@
 	-->
 	<HostName>mgt.devicemgt.iots</HostName>
 
-	<!--
-	Host name to be used for the Carbon management console
-	-->
-	<MgtHostName>mgt.devicemgt.iots</MgtHostName>
+    <!--
+    Host name to be used for the Carbon management console
+    -->
+    <MgtHostName>mgt.devicemgt.iots</MgtHostName>
 
 	<!--
 		The URL of the back end server. This is where the admin services are hosted and
@@ -77,11 +77,8 @@
 	-->
 	<ServerRoles>
 		<Role>IoTServer</Role>
-		<Role>DataAnalyticsServer</Role>
-		<Role>ComplexEventProcessor</Role>
-		<Role>IoTServer</Role>
+		<Role>CDMFAnalytics</Role>
 		<Role>CDMFPlatform</Role>
-		<Role>GeoDashboard</Role>
 	</ServerRoles>
 
 	<!-- uncommnet this line to subscribe to a bam instance automatically -->
@@ -132,7 +129,7 @@
 		 the define value + Offset.
 		 e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
 		 -->
-		<Offset>4</Offset>
+		<Offset>0</Offset>
 
 		<!-- The JMX Ports -->
 		<JMX>
@@ -367,7 +364,7 @@
 			<!-- Keystore password-->
 			<Password>wso2carbon</Password>
 			<!-- Private Key alias-->
-			<KeyAlias>devicemgt</KeyAlias>
+			<KeyAlias>wso2carbon</KeyAlias>
 			<!-- Private Key password-->
 			<KeyPassword>wso2carbon</KeyPassword>
 		</KeyStore>
