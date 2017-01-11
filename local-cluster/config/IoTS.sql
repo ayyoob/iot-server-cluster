@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
 --
--- Host: 127.0.0.1    Database: CARBON_DB
+-- Host: 127.0.0.1    Database: APPMGT_DB
 -- ------------------------------------------------------
 -- Server version	5.6.23
 
@@ -14,6 +14,22 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `APPMGT_DB`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `APPMGT_DB` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `APPMGT_DB`;
+
+--
+-- Dumping events for database 'APPMGT_DB'
+--
+
+--
+-- Dumping routines for database 'APPMGT_DB'
+--
 
 --
 -- Current Database: `CARBON_DB`
@@ -37,7 +53,7 @@ CREATE TABLE `REG_ASSOCIATION` (
   `REG_ASSOCIATION_TYPE` varchar(2000) NOT NULL,
   `REG_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`REG_ASSOCIATION_ID`,`REG_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +101,7 @@ CREATE TABLE `REG_CONTENT` (
   `REG_CONTENT_DATA` longblob,
   `REG_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`REG_CONTENT_ID`,`REG_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3377 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +137,7 @@ CREATE TABLE `REG_LOG` (
   `REG_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`REG_LOG_ID`,`REG_TENANT_ID`),
   KEY `REG_LOG_IND_BY_REG_LOGTIME` (`REG_LOGGED_TIME`,`REG_TENANT_ID`) USING HASH
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6866 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +155,7 @@ CREATE TABLE `REG_PATH` (
   PRIMARY KEY (`REG_PATH_ID`,`REG_TENANT_ID`),
   KEY `REG_PATH_IND_BY_PATH_VALUE` (`REG_PATH_VALUE`,`REG_TENANT_ID`) USING HASH,
   KEY `REG_PATH_IND_BY_PATH_PARENT_ID` (`REG_PATH_PARENT_ID`,`REG_TENANT_ID`) USING HASH
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=598 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +171,7 @@ CREATE TABLE `REG_PROPERTY` (
   `REG_VALUE` varchar(1000) DEFAULT NULL,
   `REG_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`REG_ID`,`REG_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38213 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,7 +222,7 @@ CREATE TABLE `REG_RESOURCE` (
   KEY `REG_RESOURCE_HISTORY_IND_BY_PATH_ID_NAME` (`REG_PATH_ID`,`REG_NAME`,`REG_TENANT_ID`) USING HASH,
   CONSTRAINT `REG_RESOURCE_FK_BY_CONTENT_ID` FOREIGN KEY (`REG_CONTENT_ID`, `REG_TENANT_ID`) REFERENCES `REG_CONTENT` (`REG_CONTENT_ID`, `REG_TENANT_ID`),
   CONSTRAINT `REG_RESOURCE_FK_BY_PATH_ID` FOREIGN KEY (`REG_PATH_ID`, `REG_TENANT_ID`) REFERENCES `REG_PATH` (`REG_PATH_ID`, `REG_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4300 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,7 +377,7 @@ CREATE TABLE `REG_TAG` (
   `REG_TAGGED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `REG_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`REG_ID`,`REG_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3663 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +426,7 @@ CREATE TABLE `UM_CLAIM` (
   UNIQUE KEY `UM_DIALECT_ID` (`UM_DIALECT_ID`,`UM_CLAIM_URI`,`UM_TENANT_ID`,`UM_MAPPED_ATTRIBUTE_DOMAIN`),
   KEY `UM_DIALECT_ID_2` (`UM_DIALECT_ID`,`UM_TENANT_ID`),
   CONSTRAINT `um_claim_ibfk_1` FOREIGN KEY (`UM_DIALECT_ID`, `UM_TENANT_ID`) REFERENCES `UM_DIALECT` (`UM_ID`, `UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +442,7 @@ CREATE TABLE `UM_DIALECT` (
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`),
   UNIQUE KEY `UM_DIALECT_URI` (`UM_DIALECT_URI`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,7 +457,7 @@ CREATE TABLE `UM_DOMAIN` (
   `UM_DOMAIN_NAME` varchar(255) DEFAULT NULL,
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_DOMAIN_ID`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -473,7 +489,7 @@ CREATE TABLE `UM_HYBRID_ROLE` (
   `UM_ROLE_NAME` varchar(255) DEFAULT NULL,
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -495,7 +511,7 @@ CREATE TABLE `UM_HYBRID_USER_ROLE` (
   KEY `UM_DOMAIN_ID` (`UM_DOMAIN_ID`,`UM_TENANT_ID`),
   CONSTRAINT `um_hybrid_user_role_ibfk_1` FOREIGN KEY (`UM_ROLE_ID`, `UM_TENANT_ID`) REFERENCES `UM_HYBRID_ROLE` (`UM_ID`, `UM_TENANT_ID`) ON DELETE CASCADE,
   CONSTRAINT `um_hybrid_user_role_ibfk_2` FOREIGN KEY (`UM_DOMAIN_ID`, `UM_TENANT_ID`) REFERENCES `UM_DOMAIN` (`UM_DOMAIN_ID`, `UM_TENANT_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -544,7 +560,7 @@ CREATE TABLE `UM_PERMISSION` (
   `UM_MODULE_ID` int(11) DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`),
   KEY `INDEX_UM_PERMISSION_UM_RESOURCE_ID_UM_ACTION` (`UM_RESOURCE_ID`,`UM_ACTION`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +595,7 @@ CREATE TABLE `UM_ROLE` (
   `UM_SHARED_ROLE` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`),
   UNIQUE KEY `UM_ROLE_NAME` (`UM_ROLE_NAME`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +618,7 @@ CREATE TABLE `UM_ROLE_PERMISSION` (
   KEY `UM_DOMAIN_ID` (`UM_DOMAIN_ID`,`UM_TENANT_ID`),
   CONSTRAINT `um_role_permission_ibfk_1` FOREIGN KEY (`UM_PERMISSION_ID`, `UM_TENANT_ID`) REFERENCES `UM_PERMISSION` (`UM_ID`, `UM_TENANT_ID`) ON DELETE CASCADE,
   CONSTRAINT `um_role_permission_ibfk_2` FOREIGN KEY (`UM_DOMAIN_ID`, `UM_TENANT_ID`) REFERENCES `UM_DOMAIN` (`UM_DOMAIN_ID`, `UM_TENANT_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -637,7 +653,7 @@ CREATE TABLE `UM_SYSTEM_ROLE` (
   `UM_ROLE_NAME` varchar(255) DEFAULT NULL,
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -657,7 +673,7 @@ CREATE TABLE `UM_SYSTEM_USER` (
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`),
   UNIQUE KEY `UM_USER_NAME` (`UM_USER_NAME`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -676,7 +692,7 @@ CREATE TABLE `UM_SYSTEM_USER_ROLE` (
   UNIQUE KEY `UM_USER_NAME` (`UM_USER_NAME`,`UM_ROLE_ID`,`UM_TENANT_ID`),
   KEY `UM_ROLE_ID` (`UM_ROLE_ID`,`UM_TENANT_ID`),
   CONSTRAINT `um_system_user_role_ibfk_1` FOREIGN KEY (`UM_ROLE_ID`, `UM_TENANT_ID`) REFERENCES `UM_SYSTEM_ROLE` (`UM_ID`, `UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -716,7 +732,7 @@ CREATE TABLE `UM_USER` (
   `UM_TENANT_ID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`UM_ID`,`UM_TENANT_ID`),
   UNIQUE KEY `UM_USER_NAME` (`UM_USER_NAME`,`UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -777,7 +793,7 @@ CREATE TABLE `UM_USER_ROLE` (
   KEY `UM_USER_ID_2` (`UM_USER_ID`,`UM_TENANT_ID`),
   CONSTRAINT `um_user_role_ibfk_1` FOREIGN KEY (`UM_ROLE_ID`, `UM_TENANT_ID`) REFERENCES `UM_ROLE` (`UM_ID`, `UM_TENANT_ID`),
   CONSTRAINT `um_user_role_ibfk_2` FOREIGN KEY (`UM_USER_ID`, `UM_TENANT_ID`) REFERENCES `UM_USER` (`UM_ID`, `UM_TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -795,6 +811,762 @@ CREATE TABLE `UM_USER_ROLE` (
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ANALYTICS_PROCESSED_DATA_STORE` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `ANALYTICS_PROCESSED_DATA_STORE`;
+
+--
+-- Table structure for table `ANX___7LgGz1xQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LgGz1xQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LgGz1xQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LgGz1xQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LgGz1xQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lh7WC4U_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lh7WC4U_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lh7WC4U_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lh7WC4U__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lh7WC4U__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lh_RWPg_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lh_RWPg_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lh_RWPg_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lh_RWPg__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lh_RWPg__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lii6VtM_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lii6VtM_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lii6VtM_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lii6VtM__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lii6VtM__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lj1PtK8_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lj1PtK8_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lj1PtK8_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lj1PtK8__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lj1PtK8__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lj1kXmA_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lj1kXmA_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lj1kXmA_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lj1kXmA__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lj1kXmA__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lj_9EPw_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lj_9EPw_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lj_9EPw_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lj_9EPw__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lj_9EPw__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LjvRS8E_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LjvRS8E_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LjvRS8E_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LjvRS8E__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LjvRS8E__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LkCZimc_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LkCZimc_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LkCZimc_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LkCZimc__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LkCZimc__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LklC0tQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LklC0tQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LklC0tQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LklC0tQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LklC0tQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LkvfuDI_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LkvfuDI_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LkvfuDI_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LkvfuDI__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LkvfuDI__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LlMG_f0_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LlMG_f0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LlMG_f0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LlMG_f0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LlMG_f0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lldfxow_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lldfxow_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lldfxow_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lldfxow__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lldfxow__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lm8xBdk_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lm8xBdk_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lm8xBdk_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lm8xBdk__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lm8xBdk__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LmdrDVI_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LmdrDVI_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LmdrDVI_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LmdrDVI__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LmdrDVI__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LmyweWo_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LmyweWo_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LmyweWo_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LmyweWo__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LmyweWo__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnZLWEQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnZLWEQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnZLWEQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnZLWEQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnZLWEQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnjUAo4_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnjUAo4_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnjUAo4_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnjUAo4__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnjUAo4__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LpmWZGg_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LpmWZGg_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LpmWZGg_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LpmWZGg__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LpmWZGg__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LqUghxQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LqUghxQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LqUghxQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LqUghxQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LqUghxQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lql55uQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lql55uQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lql55uQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lql55uQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lql55uQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lr_PUk0_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lr_PUk0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lr_PUk0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lr_PUk0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lr_PUk0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lt5FTKA_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lt5FTKA_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lt5FTKA_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lt5FTKA__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lt5FTKA__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lt_c9IM_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lt_c9IM_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lt_c9IM_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lt_c9IM__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lt_c9IM__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LtgHu48_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LtgHu48_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LtgHu48_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LtgHu48__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LtgHu48__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LuX1UlU_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LuX1UlU_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LuX1UlU_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LuX1UlU__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LuX1UlU__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lv6M00s_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lv6M00s_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lv6M00s_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lv6M00s__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lv6M00s__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping events for database 'ANALYTICS_PROCESSED_DATA_STORE'
@@ -1119,7 +1891,7 @@ CREATE TABLE `DM_DEVICE_TYPE` (
   `SHARED_WITH_ALL_TENANTS` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   KEY `IDX_DEVICE_TYPE` (`NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1660,7 +2432,7 @@ CREATE TABLE `AM_API` (
   `UPDATED_TIME` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`API_ID`),
   UNIQUE KEY `API_PROVIDER` (`API_PROVIDER`,`API_NAME`,`API_VERSION`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1696,7 +2468,7 @@ CREATE TABLE `AM_API_DEFAULT_VERSION` (
   `DEFAULT_API_VERSION` varchar(30) DEFAULT NULL,
   `PUBLISHED_DEFAULT_API_VERSION` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`DEFAULT_VERSION_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1717,7 +2489,7 @@ CREATE TABLE `AM_API_LC_EVENT` (
   PRIMARY KEY (`EVENT_ID`),
   KEY `API_ID` (`API_ID`),
   CONSTRAINT `am_api_lc_event_ibfk_1` FOREIGN KEY (`API_ID`) REFERENCES `AM_API` (`API_ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1802,7 +2574,7 @@ CREATE TABLE `AM_API_URL_MAPPING` (
   `MEDIATION_SCRIPT` blob,
   PRIMARY KEY (`URL_MAPPING_ID`),
   KEY `IDX_AAUM_AI` (`API_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=601 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2261,6 +3033,463 @@ CREATE TABLE `AM_WORKFLOWS` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `APM_API_CONSUMER_APPS`
+--
+
+DROP TABLE IF EXISTS `APM_API_CONSUMER_APPS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_API_CONSUMER_APPS` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SAML2_SSO_ISSUER` varchar(500) DEFAULT NULL,
+  `APP_CONSUMER_KEY` varchar(512) NOT NULL DEFAULT '',
+  `API_TOKEN_ENDPOINT` varchar(1024) DEFAULT NULL,
+  `API_CONSUMER_KEY` varchar(512) DEFAULT NULL,
+  `API_CONSUMER_SECRET` varchar(512) DEFAULT NULL,
+  `APP_NAME` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`ID`,`APP_CONSUMER_KEY`),
+  KEY `APP_CONSUMER_KEY` (`APP_CONSUMER_KEY`),
+  CONSTRAINT `apm_api_consumer_apps_ibfk_1` FOREIGN KEY (`APP_CONSUMER_KEY`) REFERENCES `IDN_OAUTH_CONSUMER_APPS` (`CONSUMER_KEY`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP`
+--
+
+DROP TABLE IF EXISTS `APM_APP`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP` (
+  `APP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `APP_PROVIDER` varchar(256) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  `APP_NAME` varchar(256) DEFAULT NULL,
+  `APP_VERSION` varchar(30) DEFAULT NULL,
+  `CONTEXT` varchar(256) DEFAULT NULL,
+  `TRACKING_CODE` varchar(100) DEFAULT NULL,
+  `VISIBLE_ROLES` varchar(500) DEFAULT NULL,
+  `UUID` varchar(500) NOT NULL,
+  `SAML2_SSO_ISSUER` varchar(500) DEFAULT NULL,
+  `LOG_OUT_URL` varchar(500) DEFAULT NULL,
+  `APP_ALLOW_ANONYMOUS` tinyint(1) DEFAULT NULL,
+  `APP_ENDPOINT` varchar(500) DEFAULT NULL,
+  `TREAT_AS_SITE` tinyint(1) NOT NULL,
+  PRIMARY KEY (`APP_ID`),
+  UNIQUE KEY `APP_PROVIDER` (`APP_PROVIDER`,`APP_NAME`,`APP_VERSION`,`TRACKING_CODE`,`UUID`),
+  KEY `IDX_APM_APP_UUID` (`UUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APPLICATION`
+--
+
+DROP TABLE IF EXISTS `APM_APPLICATION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APPLICATION` (
+  `APPLICATION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(100) DEFAULT NULL,
+  `SUBSCRIBER_ID` int(11) DEFAULT NULL,
+  `APPLICATION_TIER` varchar(50) DEFAULT 'Unlimited',
+  `CALLBACK_URL` varchar(512) DEFAULT NULL,
+  `DESCRIPTION` varchar(512) DEFAULT NULL,
+  `APPLICATION_STATUS` varchar(50) DEFAULT 'APPROVED',
+  PRIMARY KEY (`APPLICATION_ID`),
+  UNIQUE KEY `NAME` (`NAME`,`SUBSCRIBER_ID`),
+  KEY `SUBSCRIBER_ID` (`SUBSCRIBER_ID`),
+  CONSTRAINT `apm_application_ibfk_1` FOREIGN KEY (`SUBSCRIBER_ID`) REFERENCES `APM_SUBSCRIBER` (`SUBSCRIBER_ID`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_DEFAULT_VERSION`
+--
+
+DROP TABLE IF EXISTS `APM_APP_DEFAULT_VERSION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_DEFAULT_VERSION` (
+  `DEFAULT_VERSION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `APP_NAME` varchar(256) DEFAULT NULL,
+  `APP_PROVIDER` varchar(256) DEFAULT NULL,
+  `DEFAULT_APP_VERSION` varchar(30) DEFAULT NULL,
+  `PUBLISHED_DEFAULT_APP_VERSION` varchar(30) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`DEFAULT_VERSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_HITS`
+--
+
+DROP TABLE IF EXISTS `APM_APP_HITS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_HITS` (
+  `UUID` varchar(500) NOT NULL,
+  `APP_NAME` varchar(200) NOT NULL,
+  `VERSION` varchar(50) DEFAULT NULL,
+  `CONTEXT` varchar(256) NOT NULL,
+  `USER_ID` varchar(50) NOT NULL,
+  `TENANT_ID` int(11) NOT NULL DEFAULT '0',
+  `HIT_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`UUID`,`USER_ID`,`TENANT_ID`,`HIT_TIME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_JAVA_POLICY`
+--
+
+DROP TABLE IF EXISTS `APM_APP_JAVA_POLICY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_JAVA_POLICY` (
+  `JAVA_POLICY_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DISPLAY_NAME` varchar(100) NOT NULL,
+  `FULL_QUALIFI_NAME` varchar(256) NOT NULL,
+  `DESCRIPTION` varchar(2500) DEFAULT NULL,
+  `DISPLAY_ORDER_SEQ_NO` int(11) NOT NULL,
+  `IS_MANDATORY` tinyint(1) DEFAULT '0',
+  `POLICY_PROPERTIES` varchar(512) DEFAULT NULL,
+  `IS_GLOBAL` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`JAVA_POLICY_ID`),
+  UNIQUE KEY `FULL_QUALIFI_NAME` (`FULL_QUALIFI_NAME`,`DISPLAY_ORDER_SEQ_NO`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_JAVA_POLICY_MAPPING`
+--
+
+DROP TABLE IF EXISTS `APM_APP_JAVA_POLICY_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_JAVA_POLICY_MAPPING` (
+  `JAVA_POLICY_ID` int(11) NOT NULL,
+  `APP_ID` int(11) NOT NULL,
+  PRIMARY KEY (`JAVA_POLICY_ID`,`APP_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  CONSTRAINT `apm_app_java_policy_mapping_ibfk_1` FOREIGN KEY (`JAVA_POLICY_ID`) REFERENCES `APM_APP_JAVA_POLICY` (`JAVA_POLICY_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `apm_app_java_policy_mapping_ibfk_2` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_LC_EVENT`
+--
+
+DROP TABLE IF EXISTS `APM_APP_LC_EVENT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_LC_EVENT` (
+  `EVENT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `APP_ID` int(11) NOT NULL,
+  `PREVIOUS_STATE` varchar(50) DEFAULT NULL,
+  `NEW_STATE` varchar(50) NOT NULL,
+  `USER_ID` varchar(50) NOT NULL,
+  `TENANT_ID` int(11) NOT NULL,
+  `EVENT_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`EVENT_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  CONSTRAINT `apm_app_lc_event_ibfk_1` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_APP_URL_MAPPING`
+--
+
+DROP TABLE IF EXISTS `APM_APP_URL_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_APP_URL_MAPPING` (
+  `URL_MAPPING_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `APP_ID` int(11) NOT NULL,
+  `HTTP_METHOD` varchar(20) DEFAULT NULL,
+  `URL_PATTERN` varchar(512) DEFAULT NULL,
+  `SKIP_THROTTLING` tinyint(1) DEFAULT '0',
+  `POLICY_GRP_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`URL_MAPPING_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  KEY `POLICY_GRP_ID` (`POLICY_GRP_ID`),
+  CONSTRAINT `apm_app_url_mapping_ibfk_1` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `apm_app_url_mapping_ibfk_2` FOREIGN KEY (`POLICY_GRP_ID`) REFERENCES `APM_POLICY_GROUP` (`POLICY_GRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_BUSINESS_OWNER`
+--
+
+DROP TABLE IF EXISTS `APM_BUSINESS_OWNER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_BUSINESS_OWNER` (
+  `OWNER_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `OWNER_NAME` varchar(200) NOT NULL,
+  `OWNER_EMAIL` varchar(300) NOT NULL,
+  `OWNER_DESC` varchar(1500) DEFAULT NULL,
+  `OWNER_SITE` varchar(200) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`OWNER_ID`),
+  UNIQUE KEY `OWNER_NAME` (`OWNER_NAME`,`OWNER_EMAIL`,`TENANT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_BUSINESS_OWNER_PROPERTY`
+--
+
+DROP TABLE IF EXISTS `APM_BUSINESS_OWNER_PROPERTY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_BUSINESS_OWNER_PROPERTY` (
+  `OWNER_PROP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `OWNER_ID` int(11) NOT NULL,
+  `NAME` varchar(200) NOT NULL,
+  `VALUE` varchar(300) NOT NULL,
+  `SHOW_IN_STORE` tinyint(1) NOT NULL,
+  PRIMARY KEY (`OWNER_PROP_ID`),
+  KEY `OWNER_ID` (`OWNER_ID`),
+  CONSTRAINT `apm_business_owner_property_ibfk_1` FOREIGN KEY (`OWNER_ID`) REFERENCES `APM_BUSINESS_OWNER` (`OWNER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_ENTITLEMENT_POLICY_PARTIAL`
+--
+
+DROP TABLE IF EXISTS `APM_ENTITLEMENT_POLICY_PARTIAL`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_ENTITLEMENT_POLICY_PARTIAL` (
+  `ENTITLEMENT_POLICY_PARTIAL_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(256) DEFAULT NULL,
+  `CONTENT` varchar(2048) DEFAULT NULL,
+  `SHARED` tinyint(1) DEFAULT '0',
+  `AUTHOR` varchar(256) DEFAULT NULL,
+  `DESCRIPTION` varchar(1000) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ENTITLEMENT_POLICY_PARTIAL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_EXTERNAL_STORES`
+--
+
+DROP TABLE IF EXISTS `APM_EXTERNAL_STORES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_EXTERNAL_STORES` (
+  `APP_STORE_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `APP_ID` int(11) DEFAULT NULL,
+  `STORE_ID` varchar(255) NOT NULL,
+  PRIMARY KEY (`APP_STORE_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  CONSTRAINT `apm_external_stores_ibfk_1` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_FAVOURITE_APPS`
+--
+
+DROP TABLE IF EXISTS `APM_FAVOURITE_APPS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_FAVOURITE_APPS` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_ID` varchar(50) NOT NULL,
+  `TENANT_ID` int(11) NOT NULL,
+  `APP_ID` int(11) NOT NULL,
+  `CREATED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `TENANT_ID` (`TENANT_ID`,`USER_ID`,`APP_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  CONSTRAINT `apm_favourite_apps_ibfk_1` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_ONE_TIME_DOWNLOAD_LINK`
+--
+
+DROP TABLE IF EXISTS `APM_ONE_TIME_DOWNLOAD_LINK`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_ONE_TIME_DOWNLOAD_LINK` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BINARY_FILE` varchar(500) NOT NULL,
+  `UUID` varchar(500) NOT NULL,
+  `IS_DOWNLOADED` tinyint(1) NOT NULL,
+  `USERNAME` varchar(255) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  `CREATED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_POLICY_GROUP`
+--
+
+DROP TABLE IF EXISTS `APM_POLICY_GROUP`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_POLICY_GROUP` (
+  `POLICY_GRP_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(256) DEFAULT NULL,
+  `AUTH_SCHEME` varchar(50) DEFAULT NULL,
+  `THROTTLING_TIER` varchar(512) DEFAULT NULL,
+  `USER_ROLES` varchar(512) DEFAULT NULL,
+  `URL_ALLOW_ANONYMOUS` tinyint(1) DEFAULT '0',
+  `DESCRIPTION` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`POLICY_GRP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_POLICY_GROUP_MAPPING`
+--
+
+DROP TABLE IF EXISTS `APM_POLICY_GROUP_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_POLICY_GROUP_MAPPING` (
+  `POLICY_GRP_ID` int(11) NOT NULL,
+  `APP_ID` int(11) NOT NULL,
+  PRIMARY KEY (`POLICY_GRP_ID`,`APP_ID`),
+  KEY `APP_ID` (`APP_ID`),
+  CONSTRAINT `apm_policy_group_mapping_ibfk_1` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `apm_policy_group_mapping_ibfk_2` FOREIGN KEY (`POLICY_GRP_ID`) REFERENCES `APM_POLICY_GROUP` (`POLICY_GRP_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_POLICY_GRP_PARTIAL_MAPPING`
+--
+
+DROP TABLE IF EXISTS `APM_POLICY_GRP_PARTIAL_MAPPING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_POLICY_GRP_PARTIAL_MAPPING` (
+  `POLICY_GRP_ID` int(11) NOT NULL,
+  `POLICY_PARTIAL_ID` int(11) NOT NULL,
+  `EFFECT` varchar(50) DEFAULT NULL,
+  `POLICY_ID` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`POLICY_GRP_ID`,`POLICY_PARTIAL_ID`),
+  KEY `POLICY_PARTIAL_ID` (`POLICY_PARTIAL_ID`),
+  CONSTRAINT `apm_policy_grp_partial_mapping_ibfk_1` FOREIGN KEY (`POLICY_GRP_ID`) REFERENCES `APM_POLICY_GROUP` (`POLICY_GRP_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `apm_policy_grp_partial_mapping_ibfk_2` FOREIGN KEY (`POLICY_PARTIAL_ID`) REFERENCES `APM_ENTITLEMENT_POLICY_PARTIAL` (`ENTITLEMENT_POLICY_PARTIAL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_STORE_FAVOURITE_PAGE`
+--
+
+DROP TABLE IF EXISTS `APM_STORE_FAVOURITE_PAGE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_STORE_FAVOURITE_PAGE` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_ID` varchar(50) NOT NULL,
+  `TENANT_ID_OF_USER` int(11) NOT NULL,
+  `TENANT_ID_OF_STORE` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_SUBSCRIBER`
+--
+
+DROP TABLE IF EXISTS `APM_SUBSCRIBER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_SUBSCRIBER` (
+  `SUBSCRIBER_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_ID` varchar(50) NOT NULL,
+  `TENANT_ID` int(11) NOT NULL,
+  `EMAIL_ADDRESS` varchar(256) DEFAULT NULL,
+  `DATE_SUBSCRIBED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`SUBSCRIBER_ID`),
+  UNIQUE KEY `TENANT_ID` (`TENANT_ID`,`USER_ID`),
+  KEY `IDX_APM_SUBSCRIBER_USER_ID` (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_SUBSCRIPTION`
+--
+
+DROP TABLE IF EXISTS `APM_SUBSCRIPTION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_SUBSCRIPTION` (
+  `SUBSCRIPTION_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SUBSCRIPTION_TYPE` varchar(50) DEFAULT NULL,
+  `TIER_ID` varchar(50) DEFAULT NULL,
+  `APP_ID` int(11) DEFAULT NULL,
+  `LAST_ACCESSED` timestamp NULL DEFAULT NULL,
+  `APPLICATION_ID` int(11) DEFAULT NULL,
+  `SUB_STATUS` varchar(50) DEFAULT NULL,
+  `TRUSTED_IDP` varchar(255) DEFAULT NULL,
+  `SUBSCRIPTION_TIME` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`SUBSCRIPTION_ID`),
+  UNIQUE KEY `APP_ID` (`APP_ID`,`APPLICATION_ID`,`SUBSCRIPTION_TYPE`),
+  KEY `IDX_SUB_APP_ID` (`APPLICATION_ID`,`SUBSCRIPTION_ID`),
+  CONSTRAINT `apm_subscription_ibfk_1` FOREIGN KEY (`APPLICATION_ID`) REFERENCES `APM_APPLICATION` (`APPLICATION_ID`) ON UPDATE CASCADE,
+  CONSTRAINT `apm_subscription_ibfk_2` FOREIGN KEY (`APP_ID`) REFERENCES `APM_APP` (`APP_ID`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_TIER_PERMISSIONS`
+--
+
+DROP TABLE IF EXISTS `APM_TIER_PERMISSIONS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_TIER_PERMISSIONS` (
+  `TIER_PERMISSIONS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `TIER` varchar(50) NOT NULL,
+  `PERMISSIONS_TYPE` varchar(50) NOT NULL,
+  `ROLES` varchar(512) NOT NULL,
+  `TENANT_ID` int(11) NOT NULL,
+  PRIMARY KEY (`TIER_PERMISSIONS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `APM_WORKFLOWS`
+--
+
+DROP TABLE IF EXISTS `APM_WORKFLOWS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `APM_WORKFLOWS` (
+  `WF_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `WF_REFERENCE` varchar(255) NOT NULL,
+  `WF_TYPE` varchar(255) NOT NULL,
+  `WF_STATUS` varchar(255) NOT NULL,
+  `WF_CREATED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `WF_UPDATED_TIME` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `WF_STATUS_DESC` varchar(1000) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  `TENANT_DOMAIN` varchar(255) DEFAULT NULL,
+  `WF_EXTERNAL_REFERENCE` varchar(255) NOT NULL,
+  PRIMARY KEY (`WF_ID`),
+  UNIQUE KEY `WF_EXTERNAL_REFERENCE` (`WF_EXTERNAL_REFERENCE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `FIDO_DEVICE_STORE`
 --
 
@@ -2345,7 +3574,7 @@ CREATE TABLE `IDN_CLAIM` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `CLAIM_URI_CONSTRAINT` (`DIALECT_ID`,`CLAIM_URI`,`TENANT_ID`),
   CONSTRAINT `idn_claim_ibfk_1` FOREIGN KEY (`DIALECT_ID`) REFERENCES `IDN_CLAIM_DIALECT` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2361,7 +3590,7 @@ CREATE TABLE `IDN_CLAIM_DIALECT` (
   `TENANT_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `DIALECT_URI_CONSTRAINT` (`DIALECT_URI`,`TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2380,7 +3609,7 @@ CREATE TABLE `IDN_CLAIM_MAPPED_ATTRIBUTE` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `USER_STORE_DOMAIN_CONSTRAINT` (`LOCAL_CLAIM_ID`,`USER_STORE_DOMAIN_NAME`,`TENANT_ID`),
   CONSTRAINT `idn_claim_mapped_attribute_ibfk_1` FOREIGN KEY (`LOCAL_CLAIM_ID`) REFERENCES `IDN_CLAIM` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2400,7 +3629,7 @@ CREATE TABLE `IDN_CLAIM_MAPPING` (
   KEY `MAPPED_LOCAL_CLAIM_ID` (`MAPPED_LOCAL_CLAIM_ID`),
   CONSTRAINT `idn_claim_mapping_ibfk_1` FOREIGN KEY (`EXT_CLAIM_ID`) REFERENCES `IDN_CLAIM` (`ID`) ON DELETE CASCADE,
   CONSTRAINT `idn_claim_mapping_ibfk_2` FOREIGN KEY (`MAPPED_LOCAL_CLAIM_ID`) REFERENCES `IDN_CLAIM` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2419,7 +3648,7 @@ CREATE TABLE `IDN_CLAIM_PROPERTY` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `PROPERTY_NAME_CONSTRAINT` (`LOCAL_CLAIM_ID`,`PROPERTY_NAME`,`TENANT_ID`),
   CONSTRAINT `idn_claim_property_ibfk_1` FOREIGN KEY (`LOCAL_CLAIM_ID`) REFERENCES `IDN_CLAIM` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2612,7 +3841,7 @@ CREATE TABLE `IDN_OAUTH2_SCOPE` (
   `TENANT_ID` int(11) NOT NULL DEFAULT '0',
   `ROLES` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`SCOPE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=548 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2638,7 +3867,7 @@ CREATE TABLE `IDN_OAUTH_CONSUMER_APPS` (
   `APP_STATE` varchar(25) DEFAULT 'ACTIVE',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `CONSUMER_KEY_CONSTRAINT` (`CONSUMER_KEY`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2834,7 +4063,7 @@ CREATE TABLE `IDP` (
   `DISPLAY_NAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `TENANT_ID` (`TENANT_ID`,`NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2855,7 +4084,7 @@ CREATE TABLE `IDP_AUTHENTICATOR` (
   UNIQUE KEY `TENANT_ID` (`TENANT_ID`,`IDP_ID`,`NAME`),
   KEY `IDP_ID` (`IDP_ID`),
   CONSTRAINT `idp_authenticator_ibfk_1` FOREIGN KEY (`IDP_ID`) REFERENCES `IDP` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2876,7 +4105,7 @@ CREATE TABLE `IDP_AUTHENTICATOR_PROPERTY` (
   UNIQUE KEY `TENANT_ID` (`TENANT_ID`,`AUTHENTICATOR_ID`,`PROPERTY_KEY`),
   KEY `AUTHENTICATOR_ID` (`AUTHENTICATOR_ID`),
   CONSTRAINT `idp_authenticator_property_ibfk_1` FOREIGN KEY (`AUTHENTICATOR_ID`) REFERENCES `IDP_AUTHENTICATOR` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2955,7 +4184,7 @@ CREATE TABLE `IDP_METADATA` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `IDP_METADATA_CONSTRAINT` (`IDP_ID`,`NAME`),
   CONSTRAINT `idp_metadata_ibfk_1` FOREIGN KEY (`IDP_ID`) REFERENCES `IDP` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3091,7 +4320,7 @@ CREATE TABLE `SP_APP` (
   `IS_DUMB_MODE` char(1) DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `APPLICATION_NAME_CONSTRAINT` (`APP_NAME`,`TENANT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3111,7 +4340,7 @@ CREATE TABLE `SP_AUTH_STEP` (
   PRIMARY KEY (`ID`),
   KEY `APPLICATION_ID_CONSTRAINT_STEP` (`APP_ID`),
   CONSTRAINT `APPLICATION_ID_CONSTRAINT_STEP` FOREIGN KEY (`APP_ID`) REFERENCES `SP_APP` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3171,7 +4400,7 @@ CREATE TABLE `SP_INBOUND_AUTH` (
   PRIMARY KEY (`ID`),
   KEY `APPLICATION_ID_CONSTRAINT` (`APP_ID`),
   CONSTRAINT `APPLICATION_ID_CONSTRAINT` FOREIGN KEY (`APP_ID`) REFERENCES `SP_APP` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3408,12 +4637,1250 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ANALYTICS_EVENT_STORE` /*!40100 DEFAUL
 USE `ANALYTICS_EVENT_STORE`;
 
 --
+-- Table structure for table `ANX___7LgG_HPI_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LgG_HPI_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LgG_HPI_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LgG_HPI__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LgG_HPI__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LgSqDNk_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LgSqDNk_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LgSqDNk_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LgSqDNk__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LgSqDNk__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LhSZQNY_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LhSZQNY_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LhSZQNY_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LhSZQNY__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LhSZQNY__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LhkT_sY_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LhkT_sY_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LhkT_sY_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LhkT_sY__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LhkT_sY__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LiwnGJ0_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LiwnGJ0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LiwnGJ0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LiwnGJ0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LiwnGJ0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LjY6VbM_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LjY6VbM_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LjY6VbM_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LjY6VbM__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LjY6VbM__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LjoOG9U_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LjoOG9U_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LjoOG9U_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LjoOG9U__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LjoOG9U__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lk4lvLs_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lk4lvLs_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lk4lvLs_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lk4lvLs__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lk4lvLs__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lkz9Ub8_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lkz9Ub8_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lkz9Ub8_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lkz9Ub8__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lkz9Ub8__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LlunCZ4_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LlunCZ4_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LlunCZ4_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LlunCZ4__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LlunCZ4__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LlwM1M8_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LlwM1M8_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LlwM1M8_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LlwM1M8__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LlwM1M8__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LmYRdtU_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LmYRdtU_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LmYRdtU_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LmYRdtU__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LmYRdtU__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LmhiWeg_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LmhiWeg_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LmhiWeg_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LmhiWeg__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LmhiWeg__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnGx2Qc_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnGx2Qc_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnGx2Qc_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnGx2Qc__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnGx2Qc__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnGxkxw_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnGxkxw_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnGxkxw_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnGxkxw__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnGxkxw__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnRWfFw_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnRWfFw_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnRWfFw_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnRWfFw__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnRWfFw__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LnXSEdY_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LnXSEdY_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LnXSEdY_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LnXSEdY__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LnXSEdY__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lo137N8_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lo137N8_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lo137N8_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lo137N8__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lo137N8__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LoVkB_w_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LoVkB_w_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LoVkB_w_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LoVkB_w__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LoVkB_w__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lorp6QQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lorp6QQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lorp6QQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lorp6QQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lorp6QQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LpboMzA_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LpboMzA_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LpboMzA_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LpboMzA__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LpboMzA__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lpt51wo_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lpt51wo_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lpt51wo_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lpt51wo__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lpt51wo__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7Lq3NyTA_`
+--
+
+DROP TABLE IF EXISTS `ANX___7Lq3NyTA_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7Lq3NyTA_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7Lq3NyTA__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7Lq3NyTA__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LqAx6zI_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LqAx6zI_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LqAx6zI_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LqAx6zI__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LqAx6zI__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LqJRtY0_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LqJRtY0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LqJRtY0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LqJRtY0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LqJRtY0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LrzrM_s_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LrzrM_s_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LrzrM_s_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LrzrM_s__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LrzrM_s__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LsJGa6k_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LsJGa6k_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LsJGa6k_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LsJGa6k__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LsJGa6k__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LsQrqM0_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LsQrqM0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LsQrqM0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LsQrqM0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LsQrqM0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LusJbNc_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LusJbNc_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LusJbNc_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LusJbNc__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LusJbNc__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LvAifJU_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LvAifJU_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LvAifJU_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LvAifJU__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LvAifJU__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___7LvHafos_`
+--
+
+DROP TABLE IF EXISTS `ANX___7LvHafos_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___7LvHafos_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___7LvHafos__TIMESTAMP` (`timestamp`),
+  KEY `ANX___7LvHafos__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GBFh8Sk_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GBFh8Sk_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GBFh8Sk_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GBFh8Sk__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GBFh8Sk__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GCrE4g4_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GCrE4g4_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GCrE4g4_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GCrE4g4__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GCrE4g4__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GE68t_s_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GE68t_s_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GE68t_s_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GE68t_s__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GE68t_s__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GECw_vE_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GECw_vE_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GECw_vE_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GECw_vE__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GECw_vE__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GECxAtQ_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GECxAtQ_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GECxAtQ_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GECxAtQ__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GECxAtQ__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GECyzG0_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GECyzG0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GECyzG0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GECyzG0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GECyzG0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GEkYomM_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GEkYomM_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GEkYomM_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GEkYomM__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GEkYomM__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GFNJEgY_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GFNJEgY_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GFNJEgY_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GFNJEgY__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GFNJEgY__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GIwXfq0_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GIwXfq0_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GIwXfq0_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GIwXfq0__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GIwXfq0__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GLAPVIo_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GLAPVIo_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GLAPVIo_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GLAPVIo__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GLAPVIo__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GO1qG0w_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GO1qG0w_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GO1qG0w_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GO1qG0w__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GO1qG0w__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___8GO8JC2Q_`
+--
+
+DROP TABLE IF EXISTS `ANX___8GO8JC2Q_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___8GO8JC2Q_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___8GO8JC2Q__TIMESTAMP` (`timestamp`),
+  KEY `ANX___8GO8JC2Q__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ANX___seJgCO3I_`
+--
+
+DROP TABLE IF EXISTS `ANX___seJgCO3I_`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ANX___seJgCO3I_` (
+  `record_id` varchar(128) NOT NULL DEFAULT '',
+  `timestamp` bigint(20) DEFAULT NULL,
+  `data` longblob,
+  `ED0` varchar(4000) DEFAULT NULL,
+  `ED1` varchar(4000) DEFAULT NULL,
+  `ED2` varchar(4000) DEFAULT NULL,
+  `ED3` varchar(4000) DEFAULT NULL,
+  `ED4` varchar(4000) DEFAULT NULL,
+  `ED5` varchar(4000) DEFAULT NULL,
+  `ED6` varchar(4000) DEFAULT NULL,
+  `ED7` varchar(4000) DEFAULT NULL,
+  `ED8` varchar(4000) DEFAULT NULL,
+  `ED9` varchar(4000) DEFAULT NULL,
+  `partition_key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`),
+  KEY `ANX___seJgCO3I__TIMESTAMP` (`timestamp`),
+  KEY `ANX___seJgCO3I__PARTITION_KEY` (`partition_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping events for database 'ANALYTICS_EVENT_STORE'
 --
 
 --
 -- Dumping routines for database 'ANALYTICS_EVENT_STORE'
 --
+
+--
+-- Current Database: `APPMGT_DB`
+--
+
+USE `APPMGT_DB`;
 
 --
 -- Current Database: `CARBON_DB`
@@ -3526,4 +5993,4 @@ USE `ANALYTICS_EVENT_STORE`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-09 21:32:01
+-- Dump completed on 2017-01-10 22:49:25

@@ -364,7 +364,7 @@
 			<!-- Keystore password-->
 			<Password>wso2carbon</Password>
 			<!-- Private Key alias-->
-			<KeyAlias>wso2carbon</KeyAlias>
+			<KeyAlias>devicemgt</KeyAlias>
 			<!-- Private Key password-->
 			<KeyPassword>wso2carbon</KeyPassword>
 		</KeyStore>
