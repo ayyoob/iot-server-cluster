@@ -315,6 +315,7 @@ do
     -Diot.keymanager.https.port="9444" \
     -Diot.gateway.host="http.gateway.iots" \
     -Diot.gateway.https.port="8247" \
+    -Diot.gateway.http.port="8284" \
     -Dprofile=devicetype-publisher \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
