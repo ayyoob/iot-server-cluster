@@ -29,9 +29,6 @@ rem   JAVA_OPTS       (Optional) Java runtime options used when the commands
 rem                   is executed.
 rem ---------------------------------------------------------------------------
 
-rem --------- NOTE: This is an edited wso2server.sh script to facilitate
-rem spark environment variables for WSO2DAS!
-
 rem ----- if JAVA_HOME is not set we're not happy ------------------------------
 :checkJava
 
@@ -77,19 +74,8 @@ FOR %%D in ("%CARBON_HOME%\lib\commons-lang*.jar") DO set CARBON_CLASSPATH=!CARB
 rem ----- Process the input command -------------------------------------------
 
 rem Slurp the command line arguments. This loop allows for an unlimited number
-rem of arguments (the length is limited by the maximum length allowed by the command line).
+rem of arguments (up to the command line limit, anyway).
 
-
-rem -------- determine node type ----------------------------------------------
-:selectNodeType
-if ""%1""=="""" goto findJdk
-if ""%1""==""-receiverNode"" goto receiverNodeConfig
-if ""%1""==""-indexerNode"" goto indexerNodeConfig
-if ""%1""==""-analyzerNode"" goto analyzerNodeConfig
-if ""%1""==""-dashboardNode"" goto dashboardNodeConfig
-
-shift
-goto selectNodeType
 
 :setupArgs
 if ""%1""=="""" goto doneStart
@@ -111,26 +97,6 @@ if ""%1""==""-version""  goto commandVersion
 if ""%1""==""--version"" goto commandVersion
 
 shift
-goto setupArgs
-
-rem ----- receiver node configuration ------------------------------------------
-:receiverNodeConfig
-set NODE_PARAMS=-DdisableAnalyticsEngine=true -DdisableAnalyticsExecution=true -DdisableIndexing=true -DdisableDataPurging=false -DdisableAnalyticsSparkCtx=true -DdisableAnalyticsStats=true
-goto setupArgs
-
-rem ----- Indexer node configuration ------------------------------------------
-:indexerNodeConfig
-set NODE_PARAMS=-DdisableAnalyticsExecution=true -DdisableAnalyticsEngine=true -DdisableEventSink=true -DdisableAnalyticsSparkCtx=true -DdisableAnalyticsStats=true -DdisableDataPurging=true
-goto setupArgs
-
-rem ----- Analyzer node configuration ------------------------------------------
-:analyzerNodeConfig
-set NODE_PARAMS=-DdisableIndexing=true -DdisableEventSink=true -DdisableDataPurging=true -DenableAnalyticsStats=true
-goto setupArgs
-
-rem ----- Dashboard node configuration ------------------------------------------
-:dashboardNodeConfig
-set NODE_PARAMS=-DdisableIndexing=true -DdisableEventSink=true -DdisableDataPurging=true -DenableAnalyticsStats=true -DdisableAnalyticsExecution=true -DdisableAnalyticsEngine=true -DdisableAnalyticsSparkCtx=true
 goto setupArgs
 
 rem ----- commandVersion -------------------------------------------------------
@@ -166,7 +132,7 @@ rem ---------- Handle the SSL Issue with proper JDK version --------------------
 rem find the version of the jdk
 :findJdk
 
-set CMD=RUN %* %NODE_PARAMS%
+set CMD=RUN %*
 
 :checkJdk17
 "%JAVA_HOME%\bin\java" -version 2>&1 | findstr /r "1.[7|8]" >NUL
@@ -196,13 +162,11 @@ set CARBON_CLASSPATH=.\lib;%CARBON_CLASSPATH%
 
 set JAVA_ENDORSED=".\lib\endorsed";"%JAVA_HOME%\jre\lib\endorsed";"%JAVA_HOME%\lib\endorsed"
 
-set CMD_LINE_ARGS=-Xbootclasspath/a:%CARBON_XBOOTCLASSPATH% -Xms256m -Xmx1024m -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="%CARBON_HOME%\repository\logs\heap-dump.hprof"  -Dcom.sun.management.jmxremote -classpath %CARBON_CLASSPATH% %JAVA_OPTS% -Djava.endorsed.dirs=%JAVA_ENDORSED% -Dcarbon.registry.root=/ -Dcarbon.home="%CARBON_HOME%" -Dlogger.server.name="IoT-Analytics" -Dwso2.server.standalone=true -Djava.command="%JAVA_HOME%\bin\java" -Djava.opts="%JAVA_OPTS%" -Djava.io.tmpdir="%CARBON_HOME%\tmp" -Dcatalina.base="%CARBON_HOME%\lib\tomcat" -Dwso2.carbon.xml=%CARBON_HOME%\repository\conf\carbon.xml -Dwso2.registry.xml="%CARBON_HOME%\repository\conf\registry.xml" -Dwso2.user.mgt.xml="%CARBON_HOME%\repository\conf\user-mgt.xml" -Dwso2.transports.xml="%CARBON_HOME%\repository\conf\mgt-transports.xml" -Djava.util.logging.config.file="%CARBON_HOME%\repository\conf\etc\logging-bridge.properties" -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Dcarbon.config.dir.path="%CARBON_HOME%\repository\conf"  -Dcomponents.repo="%CARBON_HOME%\repository\components" -Dconf.location="%CARBON_HOME%\repository\conf" -Dcom.atomikos.icatch.file="%CARBON_HOME%\lib\transactions.properties" -Dcom.atomikos.icatch.hide_init_file_path="true" -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dcom.sun.jndi.ldap.connect.pool.authentication=simple -Dmqtt.broker.host="mqtt.gateway.iots" -Dmqtt.broker.port="1886" -Diot.core.host="backend.devicemgt.iots" -Diot.core.https.port="9448" -Diot.keymanager.host="key.mgt.iots" -Diot.keymanager.https.port="9444" -Diot.gateway.host="http.gateway.iots" -Diot.gateway.https.port="8247" -Dcom.sun.jndi.ldap.connect.pool.timeout=3000 -Dorg.terracotta.quartz.skipUpdateCheck=true -Dcarbon.classpath=%CARBON_CLASSPATH% -Dfile.encoding=UTF8
+set CMD_LINE_ARGS=-Xbootclasspath/a:%CARBON_XBOOTCLASSPATH% -Xms256m -Xmx1024m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="%CARBON_HOME%\repository\logs\heap-dump.hprof"  -Dcom.sun.management.jmxremote -classpath %CARBON_CLASSPATH% %JAVA_OPTS% -Djava.endorsed.dirs=%JAVA_ENDORSED% -Dcarbon.registry.root=/ -Dcarbon.home="%CARBON_HOME%" -Dlogger.server.name="IoT-Core" -Dwso2.server.standalone=true -Djava.command="%JAVA_HOME%\bin\java" -Djava.opts="%JAVA_OPTS%" -Djava.io.tmpdir="%CARBON_HOME%\tmp" -Dcatalina.base="%CARBON_HOME%\lib\tomcat" -Dwso2.carbon.xml=%CARBON_HOME%\repository\conf\carbon.xml -Dwso2.registry.xml="%CARBON_HOME%\repository\conf\registry.xml" -Dwso2.user.mgt.xml="%CARBON_HOME%\repository\conf\user-mgt.xml" -Dwso2.transports.xml="%CARBON_HOME%\repository\conf\mgt-transports.xml" -Djava.util.logging.config.file="%CARBON_HOME%\repository\conf\etc\logging-bridge.properties" -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Dcarbon.config.dir.path="%CARBON_HOME%\repository\conf"  -Dcomponents.repo="%CARBON_HOME%\repository\components" -Dconf.location="%CARBON_HOME%\repository\conf" -Dcom.atomikos.icatch.file="%CARBON_HOME%\lib\transactions.properties" -Dcom.atomikos.icatch.hide_init_file_path="true" -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dcom.sun.jndi.ldap.connect.pool.authentication=simple -Dcom.sun.jndi.ldap.connect.pool.timeout=3000 -Dorg.terracotta.quartz.skipUpdateCheck=true -Dcarbon.classpath=%CARBON_CLASSPATH% -Dfile.encoding=UTF8 -Dorg.wso2.ignoreHostnameVerification=true -Dorg.opensaml.httpclient.https.disableHostnameVerification=true -Dmqtt.broker.host="mqtt.gateway.iots" -Dmqtt.broker.port="1886" -Diot.core.host="backend.devicemgt.iots" -Diot.core.https.port="9448" -Diot.keymanager.host="key.mgt.iots" -Diot.keymanager.https.port="9444" -Diot.gateway.host="http.gateway.iots" -Diot.gateway.https.port="8247" -Diot.gateway.http.port="8284" -Dprofile=devicetype-backend
 
 :runJava
 echo JAVA_HOME environment variable is set to %JAVA_HOME%
 echo CARBON_HOME environment variable is set to %CARBON_HOME%
-rem ----------- loading spark specific variables
-call %CARBON_HOME%\bin\load-spark-env-vars.bat
 "%JAVA_HOME%\bin\java" %CMD_LINE_ARGS% org.wso2.carbon.bootstrap.Bootstrap %CMD%
 if "%ERRORLEVEL%"=="121" goto runJava
 :end

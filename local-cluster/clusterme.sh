@@ -20,14 +20,17 @@ rsync --recursive config/das/ analytics/
 
 #create device-type publisher-manager setup
 cp -r wso2iot-3.0.0-SNAPSHOT/core core
-rsync --recursive config/devicetype-publisher/ core/
 
 cp -r wso2iot-3.0.0-SNAPSHOT/plugins plugins
 
 #Deploy Samples.
-cd devicetype-publisher
 mvn clean install -f plugins/plugins-deployer.xml
 
-mv core devicetype-publisher
+cp -r core devicetype-publisher
+
+mv core devicetype-backend
+
+rsync --recursive config/devicetype-publisher/ devicetype-publisher/
+rsync --recursive config/devicetype-backend/ devicetype-backend/
 
 rm -r wso2iot-3.0.0-SNAPSHOT
