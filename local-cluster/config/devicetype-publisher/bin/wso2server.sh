@@ -316,7 +316,13 @@ do
     -Diot.gateway.host="http.gateway.iots" \
     -Diot.gateway.https.port="8247" \
     -Diot.gateway.http.port="8284" \
-    -Dprofile=devicetype-publisher \
+    -Diot.analytics.host="db.iots" \
+    -Diot.analytics.https.port="9445" \
+    -Diot.apimpublisher.host="mgt.devicemgt.iots" \
+    -Diot.apimpublisher.https.port="9443" \
+    -Diot.apimstore.host="mgt.devicemgt.iots" \
+    -Diot.apimstore.https.port="9443" \
+    -Dprofile=device-manager \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done

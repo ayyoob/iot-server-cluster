@@ -309,10 +309,10 @@ do
     -Dorg.opensaml.httpclient.https.disableHostnameVerification=true \
     -Dmqtt.broker.host="localhost" \
     -Dmqtt.broker.port="1886" \
-    -Diot.core.host="localhost" \
-    -Diot.core.https.port="9443" \
-    -Diot.keymanager.host="localhost" \
-    -Diot.keymanager.https.port="9443" \
+    -Diot.core.host="backend.devicemgt.iots" \
+    -Diot.core.https.port="9448" \
+    -Diot.keymanager.host="key.mgt.iots" \
+    -Diot.keymanager.https.port="9444" \
     -Diot.gateway.host="localhost" \
     -Diot.gateway.https.port="8243" \
     -Dprofile=http-gateway \

@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<IdentityProvider>
+	<IdentityProviderName>wso2.org/products/iot/devicebackend</IdentityProviderName>
+	<DisplayName>wso2.org/products/iot/devicebackend</DisplayName>
+	<IdentityProviderDescription></IdentityProviderDescription>
+	<Alias>devicebackend</Alias>
+	<IsPrimary>true</IsPrimary>
+	<IsFederationHub></IsFederationHub>
+	<HomeRealmId></HomeRealmId>
+	<ProvisioningRole></ProvisioningRole>
+	<FederatedAuthenticatorConfigs></FederatedAuthenticatorConfigs>
+	<DefaultAuthenticatorConfig>
+	</DefaultAuthenticatorConfig>
+	<ProvisioningConnectorConfigs>
+		<!--<ProvisioningConnectorConfig>
+			<ProvisioningProperties>
+			</ProvisioningProperties>
+		</ProvisioningConnectorConfig>-->
+	</ProvisioningConnectorConfigs>
+	<!--<DefaultProvisioningConnectorConfig></DefaultProvisioningConnectorConfig>-->
+	<ClaimConfig></ClaimConfig>
+	<Certificate>
+MIIDtzCCAp+gAwIBAgIES0MrpzANBgkqhkiG9w0BAQsFADCBizELMAkGA1UEBhMCU0wxCzAJBgNVBAgTAldQMQwwCgYDVQQHEwNDTUIxHzAdBgNVBAoTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMxHzAdBgNVBAsTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMxHzAdBgNVBAMTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMwHhcNMTcwMTE2MTIwMTMxWhcNMTcwNDE2MTIwMTMxWjCBizELMAkGA1UEBhMCU0wxCzAJBgNVBAgTAldQMQwwCgYDVQQHEwNDTUIxHzAdBgNVBAoTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMxHzAdBgNVBAsTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMxHzAdBgNVBAMTFmJhY2tlbmQuZGV2aWNlbWd0LmlvdHMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDCwwK9BmSL4B+yFbBv3JS/YtpipKE71io6V7yj4syF64Wmf5XV5pX4DzIpZJaDumnraRa6Rs9hcXS+ursDqvtwcb/gK0YxDi3ZkSWcsnJ1rpHZBE4Gp7D7+XWn8Vv8HjpR2eN3DrXS+wHpe+6hr+n/vAgJuA0h9HOOFvYNUTHMqKA1DzXtPrDzgCP3/otyAXUo1+wZY0Kro3KuZbTDK8Yxwv70XqzHft8cVu4M5M0zfPu2NGlNhk6rbZKfcalL7yA1LZGttVo/LunzZw56RnQv0tb6Pfa6IKaa4v93ATV3bHboFOb6GPrltrKchyDGNsfpOI77rYoPtsl6i1BAK4tpAgMBAAGjITAfMB0GA1UdDgQWBBTadh70IRMiimAuJqfpc52lO9wu6zANBgkqhkiG9w0BAQsFAAOCAQEAGJ9CzYLcP731XZsWXGjYeTlrLTge9s03wNLFZDqJKdI1MQdWNqvdc22k23rM9PDp1FaVM+yklys1+q5GS5QLUafDc3vpTGxyqSRRjShmm6wPiP+8ehsq1BwEZzyGP0RFGkIx/GE6VmaT39iD01oZjEpzmobEPO40tRGLsrNB5zmdUA8/tnsyed4GSIhYeKRJaAb5fCKpYnnLkclRdjj1OKR+z+Ad/8eELH8qMQF8Ei5YBA3U5kzI0MU3fRwKrw5DBLm+F3YvIs29fiS+Cbt8Z+RrEzTEjT+tNTTNnjFrI53C0+iI5NVwVuTh24RIvNmnJkXtwj8Rsz0ESPu2xZgjeA==
+	</Certificate>
+	<PermissionAndRoleConfig></PermissionAndRoleConfig>
+	<JustInTimeProvisioningConfig></JustInTimeProvisioningConfig>
+</IdentityProvider>
